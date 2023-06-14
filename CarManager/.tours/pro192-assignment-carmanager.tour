@@ -1,0 +1,700 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "PRO192 Assignment: CarManager",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "# Introduction\r\n\r\n## Welcome on board, ladies and gentlemen. This your captain speaking. My name is Dung and today, we are excited to guide you through our codebase, and present the results to our beloved teacher.\r\n\r\n> ### ⚠️ Warning: this tour is meant for ... \"anyone\" that at least satisfies the prerequisites. Hence, there will be some steps that somebody here has already known. You can skip any step you want if they don't matter to you. In some complicated steps, I will also put some external links for anyone who want to find out more. Anyway, feel free to go back and forth between steps, or pause to read if you want, because this is not a slideshow, but rather ... something meant for you. Lastly, feel free to leave comments, and maybe contribute to the tour. Thanks!!\r\n\r\n### Follow me on github: [@dung204](https://github.com/dung204/)\r\n"
+    },
+    {
+      "title": "Prerequisites",
+      "description": "# Prerequisites\r\n\r\n## I'm assumming that you have already got the basics down of the Java language, and some basic concepts of OOP, including:\r\n\r\n- 4 characteristics of OOP (encapsulation, inheritence, polymorphism, abstraction)\r\n- UML class diagram\r\n\r\n## If there's any part that you are not sure about, feel free to do some research and revise it on your own. "
+    },
+    {
+      "title": "Directory Structure",
+      "description": "## First thing first, here's our folder structure applied in this codebase:\r\n\r\n``` \r\nCarManager\r\n├── brands.txt (Contains data of different brand)\r\n├── cars.txt (Contains data of cars)\r\n└── src (A directory to contain all source code)\r\n    ├── CarManager.java (Contains menu that manage cars and brands)\r\n    └── com (A package that store our core classes)\r\n        ├── Brand.java\r\n        ├── BrandList.java\r\n        ├── Car.java\r\n        ├── CarList.java\r\n        └── Menu.java\r\n```\r\n\r\n### Coming up, we will explore the classes in `com` package."
+    },
+    {
+      "file": "src/com/Menu.java",
+      "description": "# `Menu` class\r\n\r\n### Our first class of the `com` package is `Menu` class. This class contains utilities to print out options and receive option input from user.\r\n\r\n#### Have a look at the structure of the `Menu` class:\r\n\r\n![Menu class diagram](./static/menu-uml.svg)",
+      "line": 6,
+      "selection": {
+        "start": {
+          "line": 7,
+          "character": 37
+        },
+        "end": {
+          "line": 7,
+          "character": 42
+        }
+      }
+    },
+    {
+      "file": "src/com/Menu.java",
+      "description": "## Note: the `ref_getChoice` method's return type is `E` and it receives an `ArrayList` of `E` type.",
+      "line": 25,
+      "title": "`Menu` class note #1"
+    },
+    {
+      "file": "src/com/Menu.java",
+      "description": "## Same goes for the param of the `int_getChoice` method.",
+      "line": 7,
+      "title": "`Menu` class note #2"
+    },
+    {
+      "file": "src/com/Menu.java",
+      "description": "## `E` here is a type that represent every possible data types (primitives, classes, interfaces, enums, ...). And this type can be apply to classes, methods, and properties (props). This is called *generics*, or \"paramatized types\" in Java. Generics allow any classes, props and methods to work with any \"data types\", and prevent code repetition (ex.: having to write the same method over and over for different data types)\r\n\r\n## To use *generics*, all you need is to put `<E>` (or any letter you want inside the `<>`). And then you can apply `E` to any props or methods you want. Hence, in this case, we put `Menu<E>` instead of `Menu` only. \r\n\r\n### For more information, check out:\r\n- [Generics in Java - GeeksforGeeks](https://www.geeksforgeeks.org/generics-in-java/)\r\n- [Generic Types (The Java™ Tutorials > Learning the Java Language > Generics (Updated))](https://docs.oracle.com/javase/tutorial/java/generics/types.html)",
+      "line": 6,
+      "title": "`Menu` class note #3: Generics"
+    },
+    {
+      "file": "src/com/Menu.java",
+      "description": "## The `int_getChoice` method prints out the options and receive inputs as an integer from the user.",
+      "line": 7,
+      "title": "`int_getChoice` method"
+    },
+    {
+      "file": "src/com/Menu.java",
+      "selection": {
+        "start": {
+          "line": 12,
+          "character": 1
+        },
+        "end": {
+          "line": 17,
+          "character": 50
+        }
+      },
+      "description": "## This part prints out the options from the array.",
+      "title": "`int_getChoice` method #1"
+    },
+    {
+      "file": "src/com/Menu.java",
+      "selection": {
+        "start": {
+          "line": 18,
+          "character": 1
+        },
+        "end": {
+          "line": 20,
+          "character": 6
+        }
+      },
+      "description": "## However, user may not enter number, so we handle the exception here, set `response` to `-1`",
+      "title": "`int_getChoice` method #2"
+    },
+    {
+      "file": "src/com/Menu.java",
+      "description": "## If everything's good, return the `response`",
+      "line": 22,
+      "title": "`int_getChoice` method #3"
+    },
+    {
+      "file": "src/com/Menu.java",
+      "selection": {
+        "start": {
+          "line": 25,
+          "character": 1
+        },
+        "end": {
+          "line": 31,
+          "character": 4
+        }
+      },
+      "description": "## The `ref_getChoice` method is the wrapper function for the `int_getChoice` method. It adds a loop to handle whenever the user inputs an out-of-bound option. This is the reason why, we sets `response` to `-1` if the user enter a not-a-number (NaN) value.\r\n\r\n### Coming up, we will explain the `Brand` class.",
+      "title": "`ref_getChoice` method"
+    },
+    {
+      "file": "src/com/Brand.java",
+      "description": "# `Brand` class\r\n\r\n## This class is the representation of real-world car brands \r\n\r\n### Have a look at the class diagram:\r\n\r\n![brand-uml](./static/brand-uml.svg)",
+      "line": 3
+    },
+    {
+      "file": "src/com/Brand.java",
+      "description": "## The `String.format()` method is pretty much like `printf` in C and Java, both receives a pattern string and values, then embed the value into the corresponding pattern. However, `String.format()` returns a `String`, while `printf` is a `void` function.\r\n\r\n### For more information, check out [this Java documentation title](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/String.html#format(java.lang.String,java.lang.Object...))\r\n\r\n### Next, the `BrandList` class.",
+      "line": 57,
+      "title": "`Brand` class: `toString()` method"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "description": "# `BrandList` class\r\n\r\n## This class is basically a list of brands (`Brand` objects).\r\n\r\n### Here's the UML class diagram:\r\n\r\n![brandlist-uml](./static/brandlist-uml.svg)",
+      "line": 9
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 9,
+          "character": 24
+        },
+        "end": {
+          "line": 9,
+          "character": 48
+        }
+      },
+      "description": "## Notice here that this class extends `ArrayList<Brand>`. `ArrayList` is a mutable (able to add, delete, and modify value of the elements). It's a *generic* class; hence, we also need to specify the class to use for the array (primitives are not allowed). In other words, ask yourself like: \"what kind of thing do we want to store in this array?\" or \"is this a list of people, or a list of flowers, or a list ... of something?\". \"Kind of thing\" or \"something\" can be related to the class we specify for `ArrayList`.",
+      "title": "`BrandList` class note #1 (part 1)"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 9,
+          "character": 24
+        },
+        "end": {
+          "line": 9,
+          "character": 48
+        }
+      },
+      "description": "## Earlier this tour, I've mentioned that to use *generics*, we have to put `<E>` (or any other letter) next to the class name. That's we are defining that class to be generic (useable for any classes), `E` is like a \"parameter\", but for classes, not value.\r\n\r\n## Think of defining a *generic* class like defining a function (func). We specify the name of the func (same as defining the name of the class), specify the parameters and name them whatever you like (same as putting `<E>`, but I can use any letter I want, `T` for example). ",
+      "title": "`BrandList` class note #1 (part 2)"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 9,
+          "character": 24
+        },
+        "end": {
+          "line": 9,
+          "character": 48
+        }
+      },
+      "description": "## Then, when we extend any *generic* class, we have to specify the \"type\" to use. This \"type\" has to be existed, not any arbitrary \"type\" or letter. Think of this just like invoking (calling, or using) a defined function, we specify existed variable or value as arguments. Here, we specify `Brand` the \"type\" we use for `ArrayList`. This can be understood as an array of `Brand`.\r\n\r\n### For more information, check out:\r\n- [Generics in Java - GeeksforGeeks](https://www.geeksforgeeks.org/generics-in-java/)\r\n- [Generic Types (The Java™ Tutorials > Learning the Java Language > Generics (Updated))](https://docs.oracle.com/javase/tutorial/java/generics/types.html)",
+      "title": "`BrandList` class note #1 (part 3)"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "description": "## In the constructor, I called `super()` - the constructor of `ArrayList`. However, I don't even need to do so. Why?\r\n\r\n## Because `ArrayList` also has a default constructor (constructor with no parameters). Therefore, when we use the constructor of a class that *extends* `ArrayList`, the `ArrayList` constructor will also be *implicitly* called.\r\n\r\n> ## ⚠️ Warning: if the parent class has a parametric constructor, we have to specify the `super()` and the corresponding parameters, or else the default constructor will be called instead.",
+      "line": 11,
+      "title": "`BrandList` class note #2"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 14,
+          "character": 1
+        },
+        "end": {
+          "line": 41,
+          "character": 4
+        }
+      },
+      "description": "## The `loadFromFile()` and `saveToFile()` method is returning `boolean` ??? We are only reading from and writing to file, so it should be `void`, isn't it?\r\n\r\n## The `boolean` value retrieved from these functions signals whether we have read from/written to file successfully or not. Why \"not\" successful? Because we may encounter some errors (`Exception`s) that we might not pay attention. For example, what if the file does not exist, or the I/O (input/output) get broken, or we don't have permission to read or write, ...?",
+      "title": "`BrandList` class note #3"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 16,
+          "character": 1
+        },
+        "end": {
+          "line": 16,
+          "character": 52
+        }
+      },
+      "description": "## Let's go to the `loadFromFile()` method. In this part, we use `Scanner` to read, but not from `System.in` (standard input) we always use, but from a `File` object - representation of computer's file. ",
+      "title": "`BrandList` class: `loadFromFile()` method #1"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 17,
+          "character": 1
+        },
+        "end": {
+          "line": 20,
+          "character": 8
+        }
+      },
+      "description": "## This whole part is reading from file, spliting the string and add a brand to the list. Notice that we have a while loop, with the condition `in.hasNextLine()` - whenever the current `Scanner` still have to read (it will stop when it meets \"end of file\" - EOF).",
+      "title": "`BrandList` class: `loadFromFile()` method #2"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 18,
+          "character": 44
+        },
+        "end": {
+          "line": 18,
+          "character": 61
+        }
+      },
+      "description": "## The `split` from `String` will split the original string into tokens based on its parameter (a `String` or a \"regex\" - \"regular expression\"). In this scenario, I'm using a regex, and here's its meaning:\r\n\r\n- `[,:]`: Accepts either `,` or `:`\r\n- `\\\\s`: Accepts any whitespace characters (including spaces, tabs, line breaks)\r\n- `*`: The preceding character/character group (in this case: `\\\\s`) may appear or not.\r\n\r\n### Example inputs and outputs:\r\n`B5-18, BMW 530i (2018), Alpine: 2.599`\r\n\r\n--> `[\"B5-18\", \"BMW 530i (2018)\", \"Alpine\", \"2.599\"]`\r\n\r\n---\r\n\r\n`B3-S19,      BMW 320i Sportline (2019),Bose:1.899`\r\n\r\n--> `[\"B3-S19\", \"BMW 320i Sportline (2019)\", \"Bose\", \"1.899\"]`",
+      "title": "`BrandList` class: `loadFromFile()` method #3"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "description": "## Finish loading, let's close the `Scanner`",
+      "line": 21,
+      "title": "`BrandList` class: `loadFromFile()` method #4"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 23,
+          "character": 1
+        },
+        "end": {
+          "line": 24,
+          "character": 20
+        }
+      },
+      "description": "## In case of fail reading (due to some `Exception`s such as: file not exists, I/O get broken, file is not allowed to read, etc.), we will clear this list (make this list empty) to make sure there's no leftovers for next time loading from file.\r\n\r\n## And we will also `return false` to signal that the reading file process failed.",
+      "title": "`BrandList` class: `loadFromFile()` method #5"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "description": "## In case everything is fine, let's `return true` to signal that reading is success!!",
+      "line": 26,
+      "title": "`BrandList` class: `loadFromFile()` method #6"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "description": "## Same pattern here for `saveToFile()` method, you can read it yourself.",
+      "selection": {
+        "start": {
+          "line": 29,
+          "character": 1
+        },
+        "end": {
+          "line": 41,
+          "character": 4
+        }
+      },
+      "title": "`BrandList` class: `saveToFile()` method"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "description": "## The `getUserChoice()` method is a wrapper method for the `Menu.ref_getChoice()`. As you can see, earlier we define `Menu` class as a *generic* class using `Menu<E>`. And now, we are using this class, we specify the \"type\", we use for `Menu` (in this case which is `Brand`). Hence, we have `Menu<Brand>`.\r\n\r\n## And because this `BrandList` class extends `ArrayList`, this will also be considered an `ArrayList` too. Therefore, we pass `this` as an argument to the `ref_getChoice()` method.",
+      "selection": {
+        "start": {
+          "line": 51,
+          "character": 1
+        },
+        "end": {
+          "line": 53,
+          "character": 4
+        }
+      },
+      "title": "`BrandList` class: `getUserChoice()` method"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 58,
+          "character": 1
+        },
+        "end": {
+          "line": 67,
+          "character": 60
+        }
+      },
+      "description": "## Next up, the `addBrand()` method. This chunk of code here receive a string as input for brand ID. Brand ID can not be empty, and it must not be duplicated.",
+      "title": "`BrandList` class: `addBrand()` method #1"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 69,
+          "character": 1
+        },
+        "end": {
+          "line": 98,
+          "character": 26
+        }
+      },
+      "description": "## `brandName`, `soundBrand` can not be empty, and `price` must be a positive. Using the same pattern to handle these fields.",
+      "title": "`BrandList` class: `addBrand()` method #2"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "description": "## Add a new `Brand` with inputted fields, and we're done 😀",
+      "line": 100,
+      "title": "`BrandList` class: `addBrand()` method #3"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 105,
+          "character": 1
+        },
+        "end": {
+          "line": 148,
+          "character": 4
+        }
+      },
+      "description": "## Same pattern for `updateBrand()` method. You can read it yourself.",
+      "title": "`BrandList` class: `updateBrand()` method"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 150,
+          "character": 1
+        },
+        "end": {
+          "line": 152,
+          "character": 4
+        }
+      },
+      "description": "## `listBrands()` method is fairly simple. In this case, we're using a special methods from the `ArrayList` class - `forEach()`. It receives a function as an argument (huh ???), and apply the pattern from the function to all the elements of the `ArrayList`.\r\n\r\n## The function I'm mentioning above, is called \"action\" function (in this scenario only, it has a lot of name, depending on different case we're dealing with). This function contains one compulsory parameter, which represents an element of the array, and the body of the function are the \"actions\" we apply to the element.",
+      "title": "`BrandList` class: `listBrands()` method #1"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 150,
+          "character": 1
+        },
+        "end": {
+          "line": 152,
+          "character": 4
+        }
+      },
+      "description": "## This function is actually equivalent to:\r\n\r\n```java\r\npublic void listBrands() {\r\n    for(int i = 0; i < this.size(); i++) {\r\n        System.out.println(this.get(i));\r\n    }\r\n}\r\n```",
+      "title": "`BrandList` class: `listBrands()` method #2"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 150,
+          "character": 1
+        },
+        "end": {
+          "line": 152,
+          "character": 4
+        }
+      },
+      "description": "## Q: But wait, the function you pass into the `forEach`, I can't see any parameter. I see that the `println` and `System.out`, that's familiar to me. But the `::`, what the heck is that?\r\n\r\n## A: This is a just a shorthand. I can rewrite line `151` fully like this:\r\n\r\n```java\r\npublic void printBrand(Brand brand) {\r\n    System.out.println(brand);\r\n}\r\n\r\npublic void listBrands() {\r\n    this.forEach(printBrand);\r\n}\r\n```\r\n\r\n## or even shorter:\r\n\r\n```java\r\nthis.forEach(brand -> System.out.println(brand));\r\n```\r\n\r\n## And shorter (note: this can be used if the \"action\" function has only 1 parameter):\r\n\r\n```java\r\nthis.forEach(System.out::println);\r\n```",
+      "title": "`BrandList` class: `listBrands()` method #3"
+    },
+    {
+      "file": "src/com/BrandList.java",
+      "selection": {
+        "start": {
+          "line": 150,
+          "character": 1
+        },
+        "end": {
+          "line": 152,
+          "character": 4
+        }
+      },
+      "description": "## Q: And what about the `->`, what does it mean?\r\n\r\n## A: This is a feature called \"lambda expression\", which can replace functions in some scenarios. I won't explain it fully here, but I will leave some external links to that:\r\n\r\n- [Java Lambda Expressions - W3School](https://www.w3schools.com/java/java_lambda.asp)\r\n- [Lambda Expressions (The Java™ Tutorials > Learning the Java Language > Classes and Objects)](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html)\r\n\r\n## Coming up next, let's go to the `Car` class.",
+      "title": "`BrandList` class: `listBrands()` method #4"
+    },
+    {
+      "file": "src/com/Car.java",
+      "description": "# `Car` class\r\n\r\n## A class that represents real-world cars\r\n\r\n## Here's the UML class diagram:\r\n\r\n![car-uml](./static/car-uml.svg)",
+      "line": 3
+    },
+    {
+      "file": "src/com/Car.java",
+      "selection": {
+        "start": {
+          "line": 3,
+          "character": 18
+        },
+        "end": {
+          "line": 3,
+          "character": 44
+        }
+      },
+      "description": "## This class *implements* `Comparable<Car>`. `Comparable` is an interface that offers utilities, and offers any other classes that implements this the ability to compare between instances (objects).\r\n\r\n## The `Comparable` is a *generic* interface, we can specify the \"type\" we use for the interface, or not. It's actually a good practice to specify the \"type\" for the `Comparable`, because the *`abstract`* method of the interface - `compareTo()` takes an `Object` value as an argument (arg). If we specify the \"type\" - let's say `Car` for example, then `compareTo()` will take an `Car` instead of  `Object` value as an arg. Then, we can use methods of `Car` directly, without having to manually cast from `Object` to `Car`\r\n\r\n## `Comparable` is not only useful for comparing objects, but also for sorting a list of objects (via `Comparator` interface for `Collections.sort()`, or `Arrays.sort()`)\r\n\r\n---\r\n\r\n## For more information, check out:\r\n- [Comparable (Java SE 20 & JDK 20)](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/Comparable.html)",
+      "title": "`Car` class note #1"
+    },
+    {
+      "file": "src/com/Car.java",
+      "selection": {
+        "start": {
+          "line": 66,
+          "character": 1
+        },
+        "end": {
+          "line": 70,
+          "character": 4
+        }
+      },
+      "description": "## `compareTo()` is an *`abstract`* method from `Comparable` interface. For anyone who've already forgotten: an *`abstract`* method is a method without its body, just the name, return type, and the parameters. Any class that implements interface(s), or extends abstract class(es) that contains *`abstract`* methods, have to override those methods.\r\n\r\n## Back to `compareTo()` method, the return type of this method is `int` - an integer that indicates the result of the comparison: `0` if equal, `< 0` if `A` follows after `B`, and `> 0` if `A` preceeds `B`.\r\n\r\n### Note: `A` is the object which call its `compareTo()` method, `B` is the object passed into the method as an argument. \r\n\r\n---\r\n\r\n## For more information, check out:\r\n- [compareTo() - Comparable (Java SE 20 & JDK 20)](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/Comparable.html#compareTo(java.lang.Object))",
+      "title": "`Car` class: `compareTo()` method #1"
+    },
+    {
+      "file": "src/com/Car.java",
+      "selection": {
+        "start": {
+          "line": 66,
+          "character": 1
+        },
+        "end": {
+          "line": 70,
+          "character": 4
+        }
+      },
+      "description": "## Here, we compare the `brandName`. If two `brandName`s are equal, we will compare the `carID`.",
+      "title": "`Car` class: `compareTo()` method #2"
+    },
+    {
+      "file": "src/com/Car.java",
+      "selection": {
+        "start": {
+          "line": 68,
+          "character": 39
+        },
+        "end": {
+          "line": 68,
+          "character": 48
+        }
+      },
+      "description": "## Here's another `compareTo()` method that is called from the object `brandName`, which is a `String`. Well, you've guessed right!! This is the `compareTo()` method in the `Comparable` interface, that `String` also implements. If you don't believe, you can see its definition.\r\n\r\n### 💡 Tip: place your cursor on the `compareTo`, right-click your mouse, select \"Go to definition\", or simply hit F12 (by default) on your keyboard. Then scroll up until your find `public final class String ...`\r\n\r\n---\r\n\r\n## Coming up next, the `CarList` class.",
+      "title": "`Car` class: `compareTo()` method #3"
+    },
+    {
+      "file": "src/com/CarList.java",
+      "description": "# `CarList` class\r\n\r\n## A class that represents a list of cars, pretty much like `BrandList`.\r\n\r\n## This class has so many patterns in common with the `BrandList` class. Hence, I won't explain the methods too much and too detail. You can read all by yourself. ",
+      "line": 9
+    },
+    {
+      "file": "src/com/CarList.java",
+      "selection": {
+        "start": {
+          "line": 104,
+          "character": 20
+        },
+        "end": {
+          "line": 104,
+          "character": 38
+        }
+      },
+      "description": "## In the `addCar()` method, when handling inputted `frameID`, we have to make sure it follows this format - \"F00000\". In other words, we have to make sure it has a `F` character in the beginning, followed by 5 digits. Hence, we will use `matches()` method from `String` to verify whether a string matches a format. This regex (format) contains:\r\n\r\n`F`: matches the character F\r\n\r\n`\\\\d`: matches digits\r\n\r\n`{5}`: preceeding tokens (`\\\\d` in this case) exactly 5 times.\r\n\r\n## Hence, these sample string will satisfy: `F12345`, `F99999`, `F44521`, ...\r\n\r\n## and these will not: `F12`, `F`, `12352`, `F4235346`, ...",
+      "title": "`Car` class: `addCar()` method #1"
+    },
+    {
+      "file": "src/com/CarList.java",
+      "selection": {
+        "start": {
+          "line": 115,
+          "character": 21
+        },
+        "end": {
+          "line": 115,
+          "character": 39
+        }
+      },
+      "description": "## Same goes here for `engineID`. You can try to parse the pattern yourself."
+    },
+    {
+      "file": "src/com/CarList.java",
+      "selection": {
+        "start": {
+          "line": 215,
+          "character": 1
+        },
+        "end": {
+          "line": 218,
+          "character": 4
+        }
+      },
+      "description": "## Let's talk about the `listCars` method. This method sorts the list ascendingly (check out `compareTo()` methods of `Car` class) and then prints out all the elements in the list.\r\n\r\n## Earlier, in the `BrandList` class, we use `forEach` method of `ArrayList` to print out the elements. Of course, we're still using it here. However, we are not printing out the `car` (or more specifically, `car.toString()`), but `car.screenString()`. Hence, we have to use lambda expression here (defining a function using `->`, without even naming it, or having to know its return type).\r\n\r\n---\r\n\r\n## For more information, check out:\r\n\r\n- [Java Lambda Expressions - W3School](https://www.w3schools.com/java/java_lambda.asp)\r\n- [Lambda Expressions (The Java™ Tutorials > Learning the Java Language > Classes and Objects)](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html)",
+      "title": "`CarList` class: `listCars()` method #1"
+    },
+    {
+      "file": "src/com/CarList.java",
+      "selection": {
+        "start": {
+          "line": 215,
+          "character": 1
+        },
+        "end": {
+          "line": 218,
+          "character": 4
+        }
+      },
+      "description": "## What is more important is the problem of sorting, there are different ways of sorting a list (assuming `list` an `ArrayList` object, we have imported enough packages/libraries, the list is \"sortable\", and we are sorting ascendingly):\r\n\r\n```java\r\n// Way #1\r\nCollections.sort(list)\r\n\r\n// Way #2\r\nlist.sort()\r\n\r\n// Way #3\r\nlist.stream.sorted()\r\n\r\n// And many other ways ...\r\n```\r\n\r\n### Note: what I mean a list is sortable here is that the class that we specify for `ArrayList` must implements `Comparable` interface. For example, if `ArrayList<Car>` is sortable, then `Car` must implements `Comparable` interface.  ",
+      "title": "`CarList` class: `listCars()` method #2"
+    },
+    {
+      "file": "src/com/CarList.java",
+      "selection": {
+        "start": {
+          "line": 215,
+          "character": 1
+        },
+        "end": {
+          "line": 218,
+          "character": 4
+        }
+      },
+      "description": "## Pay attention that way #3 (the way used in this code), is different from 2 other ways that it return a new sorted list (`Stream` actually) (i.e. create a clone list, sort that clone list, and use that clone list to operate). Using this way, we can retain the original version of the array (`this`). \r\n\r\n## Actually, this is a well-known principal of functional programming paradigm: A function should not mutate (change the value of) any variables, objects that are outside the function's scope. Instead, create a copied version of those variables, and mutate them freely as you want (for more information about functional programming, you can google it yourself).\r\n\r\n## Note: `Stream` class represents a sequence of elements that offers some special methods for aggregation.\r\n\r\n---\r\n### For more information, check out:\r\n\r\n- [Stream (Java SE 20 & JDK 20)](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/stream/Stream.html)\r\n",
+      "title": "`CarList` class: `listCars()` method #3"
+    },
+    {
+      "title": "Transition",
+      "description": "## Hey, before you continue, if you've understand all the previous step (or at least get the most out of it 😀), and reached this point, congratulation !! 🥳🥳🎉🎉\r\n\r\n## We have reviewed all the classes in the `com` package. Those are the basic components of this project, and how would it be if we combine all of them? Let use all of them in `CarManager` class. Are you ready?"
+    },
+    {
+      "file": "src/CarManager.java",
+      "description": "## Here we are in the final (not `final` 😀😀) class - `CarManager` class.\r\n\r\n## In this class, we use all of the classes from the `com` package to create a program that manage information of cars. 🚗🚗\r\n\r\n## It has a menu with different options for user to choose, it let user input, enter their information, and we prompt them ... \"politely\"",
+      "line": 9,
+      "title": "`CarManager` class"
+    },
+    {
+      "file": "src/CarManager.java",
+      "selection": {
+        "start": {
+          "line": 14,
+          "character": 1
+        },
+        "end": {
+          "line": 28,
+          "character": 55
+        }
+      },
+      "description": "## First thing we do in the program is to load information of brands and cars from `brands.txt` and `cars.txt`, respectively.",
+      "title": "`CarManager` class: `main()` method #1"
+    },
+    {
+      "file": "src/CarManager.java",
+      "selection": {
+        "start": {
+          "line": 14,
+          "character": 1
+        },
+        "end": {
+          "line": 28,
+          "character": 55
+        }
+      },
+      "description": "## Here, we use `if-else` statement to handle the operation of loading from file. That's why the return type of `loadFromFile()` method should be `boolean` instead of `void`, when errors happen, we can easily prompt user that we can not get the information of cars and brands.\r\n\r\n## And after prompting, here, we exit the program, since we don't have any information to work with. \r\n\r\n---\r\n\r\n*(Bonus, reading this is optional, but it's good to know)*\r\n\r\n### In real world scenario, the file will be read again and again if some errors happen, in an amount of time (also known as timeout). When timeout is over, it will stop reading, and indicates an error.",
+      "title": "`CarManager` class: `main()` method #2"
+    },
+    {
+      "file": "src/CarManager.java",
+      "selection": {
+        "start": {
+          "line": 30,
+          "character": 1
+        },
+        "end": {
+          "line": 95,
+          "character": 31
+        }
+      },
+      "description": "## We setup a `do-while` loop to process the program when we have enough information, let's have a look inside the loop.",
+      "title": "`CarManager` class: `main()` method #3"
+    },
+    {
+      "file": "src/CarManager.java",
+      "selection": {
+        "start": {
+          "line": 31,
+          "character": 1
+        },
+        "end": {
+          "line": 31,
+          "character": 43
+        }
+      },
+      "description": "## First of all, we show a menu of options, and let user enter their own options, before we process it. We use a function called `showMenuAndGetOption()`. Have a look at its definition.",
+      "title": "`CarManager` class: `main()` method #4"
+    },
+    {
+      "file": "src/CarManager.java",
+      "selection": {
+        "start": {
+          "line": 100,
+          "character": 1
+        },
+        "end": {
+          "line": 116,
+          "character": 4
+        }
+      },
+      "description": "## The `showMenuAndGetOption()` is capitalizing `Menu` class, and more specifically, the `int_getChoice()` method.",
+      "title": "`CarManager` class: `showMenuAndGetOption()` method #1"
+    },
+    {
+      "file": "src/CarManager.java",
+      "selection": {
+        "start": {
+          "line": 101,
+          "character": 1
+        },
+        "end": {
+          "line": 113,
+          "character": 9
+        }
+      },
+      "description": "## Here, we specify an array of options. In order to list out the `String`s directly like this, we have to use primitive (normal) array as we always do:\r\n\r\n```java\r\nString[] options = new String[] {\"a\", \"b\", \"c\"}\r\n```\r\n\r\n## Then convert it to `ArrayList` like this:\r\n\r\n```java\r\nArrayList<String> optionsList = new ArrayList<>(Arrays.asList(options))\r\n```\r\n\r\n### Note: `Arrays.asList` convert an array into a `List` object, and pass that `List` object to the constructor of `ArrayList`, we get an `ArrayList`, easy peasy 😏\r\n\r\n## Combining two above step, we have the code that is displayed here.",
+      "title": "`CarManager` class: `showMenuAndGetOption()` method #2"
+    },
+    {
+      "file": "src/CarManager.java",
+      "selection": {
+        "start": {
+          "line": 101,
+          "character": 1
+        },
+        "end": {
+          "line": 113,
+          "character": 9
+        }
+      },
+      "description": "## You can also use `ArrayList.add()` method:\r\n\r\n```java\r\nArrayList<String> options = new ArrayList<>();\r\n\r\noptions.add(\"a\");\r\noptions.add(\"b\");\r\noptions.add(\"c\");\r\n```",
+      "title": "`CarManager` class: `showMenuAndGetOption()` method #3"
+    },
+    {
+      "file": "src/CarManager.java",
+      "selection": {
+        "start": {
+          "line": 115,
+          "character": 1
+        },
+        "end": {
+          "line": 115,
+          "character": 54
+        }
+      },
+      "description": "## Then, we simply create a `Menu` instance (object), and call `int_getChoice()` method. Notice that, we're not creating a variable of class `Menu` and then invoke the `int_getChoice()` method, but we invoke the method, just right after create the object. Using this code-writing style, we don't have to think of names for a lot of variables anymore.\r\n\r\n---\r\n\r\n*(Bonus, it's good to know)*\r\n\r\n> ## *There are only two hard things in Computer Science: cache validation and naming things.*\r\n> -- Phil Karlton --",
+      "title": "`CarManager` class: `showMenuAndGetOption()` method #4"
+    },
+    {
+      "file": "src/CarManager.java",
+      "selection": {
+        "start": {
+          "line": 33,
+          "character": 1
+        },
+        "end": {
+          "line": 95,
+          "character": 1
+        }
+      },
+      "description": "## After receiving an option from the user, it's time for us to handle it. We use a simple `switch-case` statement here. From this part, we only have to invoke different methods from `CarList` and `BrandList`. Fairly easy, isn't it 😏? Now, it's your turn to read these chunks of code by yourself. ",
+      "title": "`CarManager` class: `main()` method #5"
+    },
+    {
+      "title": "Conclusion",
+      "description": "## ... And, we've done. Hooray 🎉🎉\r\n\r\n## If you've made it here, congratulations. This is the end of our trip to the codebase. I hope you achieved some useful knowledge and experience for later moments in your career.\r\n\r\n## I will see you in future trips. 👋👋"
+    },
+    {
+      "title": "Credits",
+      "description": "# Credits\r\n\r\n## This document is made by [@dung204](https://github.com/dung204/), and open for everyone.\r\n\r\n### Follow me on GitHub: [@dung204](https://github.com/dung204/)"
+    }
+  ]
+}
