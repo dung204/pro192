@@ -21,9 +21,13 @@ Each assignment/test folder contains:
 
 ## 2. Code documentation
 
-All documentation for each assignments and tests are available at `README.md` file.
+- All documentation for each assignments and tests are available at `README.md` file.
 
-_Official repository for source code, documentation, and "tour guide" for assignments, tests of PRO192 from FPT University._
+> ### ⚠️ Before you use the documentation:
+>
+> 1. The documentation uses code from the source code files. For a better experience, opening code files and read them along with `README.md` is recommended.
+> 2. Some of the content may not be useful for you. Feel free to skip if you want to. In the future, I will add some signs to notify if some parts are important.
+> 3. The documentation is composed by [@dung204](https://github.com/dung204/), and open for everyone to use. However, copying or re-uploading are not allowed under any circumstances.
 
 ## 3. Tour guide (for [Visual Studio Code](https://code.visualstudio.com/) only)
 
@@ -37,29 +41,29 @@ _Official repository for source code, documentation, and "tour guide" for assign
 
   - Open VSCode
 
-  - Find and click Extension panel (or `Ctrl+Shift+X`) <img src="https://i.imgur.com/cwcLnAh.png" width="30"></img>
+  - Find and click Extension panel (or `Ctrl+Shift+X`) <img src="./static/extension-panel.png" alt="extension-panel" width="30"></img>
 
   - You want to find this extension
 
-  ![codetour-extension](https://i.imgur.com/Dfz3eZj.png)
+  ![codetour-extension](./static/codetour-extension.png)
 
   - Hit "Install" to install the extension
 
 ### 3.2. Using CodeTour:
 
-- Click "Explorer" <img src="https://i.imgur.com/Zwzb2n8.png" width="30"> (or `Ctrl+Shift+E`), you want to find "CodeTour" panel
+- Click "Explorer" <img src="./static/explorer-panel.png" alt="explorer-panel" width="30"> (or `Ctrl+Shift+E`), you want to find "CodeTour" panel
 
-![codetour-nav](https://i.imgur.com/oD0zC7u.png)
+![codetour-nav-1](./static/codetour-nav-1.png)
 
 - If "CodeTour" panel does not show, make sure the extension is enabled, then in the "Explorer", click the three dots ($\cdots$) and check "CodeTour", like this:
 
-![codetour-nav](https://i.imgur.com/24dKxQX.png)
+![codetour-nav-2](./static/codetour-nav-2.png)
 
 - Click play button to start the tour for any tour-guide-supported source code.
 
 - A step in the tour guide looks like this:
 
-![codetour-step](https://i.imgur.com/CdqfTBm.png)
+![codetour-step](./static/codetour-step.png)
 
 - Buttons explained:
 
@@ -73,6 +77,6 @@ _Official repository for source code, documentation, and "tour guide" for assign
 
 - You can also jump to any step you want in the "CodeTour" panel, as long as the tour is running.
 
-![codetour-jump-step](https://i.imgur.com/PGaYObr.png)
+![codetour-jump-step](./static/codetour-jump-step.png)
 
 > ⚠️ : The $\uparrow$ and $\downarrow$ are for **moving** steps up/down, **NOT navigating** to previous/next step. Hence, it's not recommended to click these 2 buttons.

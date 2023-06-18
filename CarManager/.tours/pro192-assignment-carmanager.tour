@@ -343,15 +343,15 @@
       "file": "src/com/BrandList.java",
       "selection": {
         "start": {
-          "line": 150,
-          "character": 1
+          "line": 1,
+          "character": 129
         },
         "end": {
-          "line": 152,
-          "character": 4
+          "line": 3,
+          "character": 324
         }
       },
-      "description": "## `listBrands()` method is fairly simple. In this case, we're using a special methods from the `ArrayList` class - `forEach()`. It receives a function as an argument (huh ???), and apply the pattern from the function to all the elements of the `ArrayList`.\r\n\r\n## The function I'm mentioning above, is called \"action\" function (in this scenario only, it has a lot of name, depending on different case we're dealing with). This function contains one compulsory parameter, which represents an element of the array, and the body of the function are the \"actions\" we apply to the element.",
+      "description": "## `listBrands()` method is fairly simple. In this case, we're using a special method from the `ArrayList` class - `forEach()`. It receives a function as an argument (huh ???), and apply the pattern from the function to all the elements of the `ArrayList`.\r\n\r\n## The function I'm mentioning above, is called \"action\" function (in this scenario only, it has a lot of name, depending on different case we're dealing with). This function contains one compulsory parameter, which represents an element of the array, and the body of the function are the \"actions\" we apply to the element.",
       "title": "`BrandList` class: `listBrands()` method #1"
     },
     {
@@ -408,12 +408,12 @@
       "file": "src/com/Car.java",
       "selection": {
         "start": {
-          "line": 3,
-          "character": 18
+          "line": 1,
+          "character": 1
         },
         "end": {
-          "line": 3,
-          "character": 44
+          "line": 10,
+          "character": 125
         }
       },
       "description": "## This class *implements* `Comparable<Car>`. `Comparable` is an interface that offers utilities, and offers any other classes that implements this the ability to compare between instances (objects).\r\n\r\n## The `Comparable` is a *generic* interface, we can specify the \"type\" we use for the interface, or not. It's actually a good practice to specify the \"type\" for the `Comparable`, because the *`abstract`* method of the interface - `compareTo()` takes an `Object` value as an argument (arg). If we specify the \"type\" - let's say `Car` for example, then `compareTo()` will take an `Car` instead of  `Object` value as an arg. Then, we can use methods of `Car` directly, without having to manually cast from `Object` to `Car`\r\n\r\n## `Comparable` is not only useful for comparing objects, but also for sorting a list of objects (via `Comparator` interface for `Collections.sort()`, or `Arrays.sort()`)\r\n\r\n---\r\n\r\n## For more information, check out:\r\n- [Comparable (Java SE 20 & JDK 20)](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/lang/Comparable.html)",
@@ -453,12 +453,12 @@
       "file": "src/com/Car.java",
       "selection": {
         "start": {
-          "line": 68,
-          "character": 39
+          "line": 3,
+          "character": 51
         },
         "end": {
-          "line": 68,
-          "character": 48
+          "line": 3,
+          "character": 213
         }
       },
       "description": "## Here's another `compareTo()` method that is called from the object `brandName`, which is a `String`. Well, you've guessed right!! This is the `compareTo()` method in the `Comparable` interface, that `String` also implements. If you don't believe, you can see its definition.\r\n\r\n### 💡 Tip: place your cursor on the `compareTo`, right-click your mouse, select \"Go to definition\", or simply hit F12 (by default) on your keyboard. Then scroll up until your find `public final class String ...`\r\n\r\n---\r\n\r\n## Coming up next, the `CarList` class.",
@@ -473,12 +473,12 @@
       "file": "src/com/CarList.java",
       "selection": {
         "start": {
-          "line": 104,
-          "character": 20
+          "line": 3,
+          "character": 1
         },
         "end": {
-          "line": 104,
-          "character": 38
+          "line": 7,
+          "character": 63
         }
       },
       "description": "## In the `addCar()` method, when handling inputted `frameID`, we have to make sure it follows this format - \"F00000\". In other words, we have to make sure it has a `F` character in the beginning, followed by 5 digits. Hence, we will use `matches()` method from `String` to verify whether a string matches a format. This regex (format) contains:\r\n\r\n`F`: matches the character F\r\n\r\n`\\\\d`: matches digits\r\n\r\n`{5}`: preceeding tokens (`\\\\d` in this case) exactly 5 times.\r\n\r\n## Hence, these sample string will satisfy: `F12345`, `F99999`, `F44521`, ...\r\n\r\n## and these will not: `F12`, `F`, `12352`, `F4235346`, ...",
